@@ -1,0 +1,65 @@
+//Starting value of x = starting position of car
+var x = 10;
+var stars = false;
+background("black");
+
+function draw() {
+  drawBackground();
+  //Car Body - a rectangle and a hexagon
+  noFill();
+  stroke("red");
+  strokeWeight(6);
+  regularPolygon(x+52, 290, 6, 30);
+  fill("red");
+  strokeWeight(0);
+  rect(x, 290, 100, 30);
+  
+  //tires
+  strokeWeight(0);
+  fill("black");
+  ellipse(x + 25, 321, 24, 24);
+  ellipse(x + 75, 321, 24, 24);
+  stroke("white");
+  strokeWeight(1);
+  ellipse(x + 25, 321, 6, 6);
+  ellipse(x + 75, 321, 6, 6);
+  
+  //Animate car by adding a block to increase the value of x
+  x+=2;
+  
+  //If car leaves screen, have it start over.
+  if (x > 400) {
+    x = -200;
+  }
+  
+}
+function drawBackground() {
+  strokeWeight(0);
+  //Draw Background
+  //redraw black path behind car animation
+  fill("black");
+  rect(0, 260, 400, 72);
+  //draw road
+  fill("gray");
+  rect(0, 332, 400, 79);
+  // draw stars only if this hasn't been done already
+  if (stars === false) {
+    for (var i = 0; i < 1000; i++) {
+      //Draw Stars
+      strokeWeight(randomNumber(1, 2));
+      stroke("yellow");
+      point(randomNumber(0, 400), randomNumber(0, 330));
+    }
+    stars = true;
+  }
+  
+  //Draw sun, moon &/or stars
+  noStroke();
+  fill(rgb(255, 195, 0));
+  ellipse(100, 100, 50, 50);
+ 
+  shape(300, 50, 318, 105, 272, 72, 328, 72, 282, 105);
+  //turn moon into crescent moon
+  fill("black");
+  ellipse(120, 100, 50, 50);
+}
